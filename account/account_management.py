@@ -4,6 +4,7 @@ from loan import handle_loan_option
 from utils import clear_console
 from transaction import TransactionService
 
+
 class AccountService: #kurt
     current_account: BankAccount | None = None
     accounts:List[BankAccount] = list()   
@@ -20,7 +21,7 @@ class AccountService: #kurt
     def find_account(self, id: int) -> BankAccount|None:
         print("TODO:find account:", id)
         return None
-    # TODO: Other methods such as (balance_inquery)
+    #TODO: Other methods such as (balance_inquery)
 
 account_service = AccountService()
 
@@ -83,4 +84,3 @@ def handle_account_option(): #group 1
             transaction_service.withdrawal()
         # handle other options here
         clear_console()
-
