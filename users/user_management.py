@@ -1,9 +1,9 @@
-import random
 from account import handle_account_option
 from utils import clear_console
+from utils import clear_console
+import random
 import json
 import os
-from utils import clear_console
 
 class User:
     def __init__(self, User_Id='', pin='', address='', bday='', fullname='', mob_num='', authentication=0, email='', nationality='', approval=0):
@@ -232,15 +232,23 @@ class UserService:
 
     def profile(self):
         from account import account_service
+        from transaction import TransactionService
         print("          ~ PROFILE INFO ~\n")
-        print(f"User ID:\t\t{self.login_user.User_Id}")
-        print(f"Full Name:\t\t{self.login_user.name}")
-        print(f"Balance:\t\t{account_service.current_account.balance}")
-        print(f"Mobile Number:\t\t{self.login_user.mobile_number}")
-        print(f"Address:\t\t{self.login_user.address}")
-        print(f"Birthdate:\t\t{self.login_user.bday}")
-        print(f"Email Address:\t\t{self.login_user.email}")
-        print(f"Nationality:\t\t{self.login_user.nationality}")
+        print(f"User ID\t\t:\t\t{self.login_user.User_Id}")
+        print(f"Full Name\t:\t\t{self.login_user.name}")
+
+        with open("data/accounts.json", 'r') as file:
+            accounts_data = json.load(file)
+            for acc in accounts_data:
+                if acc["account_id"] == account_service.current_account.account_id:
+                    balance = acc["balance"]
+
+        print(f"Balance\t\t:\t\t{balance}")
+        print(f"Mobile Number\t:\t\t{self.login_user.mobile_number}")
+        print(f"Address\t\t:\t\t{self.login_user.address}")
+        print(f"Birthdate\t:\t\t{self.login_user.bday}")
+        print(f"Email Address\t:\t\t{self.login_user.email}")
+        print(f"Nationality\t:\t\t{self.login_user.nationality}")
         input("Press enter to exit")
 
     def admin_panel(self):
