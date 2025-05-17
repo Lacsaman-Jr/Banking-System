@@ -3,10 +3,10 @@ from .bank_account import BankAccount
 from loan import handle_loan_option
 from utils import clear_console
 from transaction import TransactionService
+from datetime import datetime
 import json
 import os
 import random
-from datetime import datetime
 
 class AccountService:
     current_account: BankAccount | None = None
@@ -39,6 +39,10 @@ class AccountService:
             print("Invalid input for balance.")
             return
         
+        if balance < 500:
+            print("initial deposit must be at least 500 php")
+            return
+
         SAVINGS, JOINT, STUDENT, BUSINESS, PERSONAL = (1, 2, 3, 4, 5)
         print("choose the type of your account:")
         print(f"\t{SAVINGS} : SAVINGS ACCOUNT")
@@ -345,7 +349,7 @@ def handle_account_option():
                 input("Press enter to continue")
                 return
 
-            
+
             original_sender_balance = account_service.current_account.balance
             account_service.current_account.balance -= amount
             
